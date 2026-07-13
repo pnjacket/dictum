@@ -22,7 +22,7 @@ The fix isn't "write more docs." It's writing them against a **contract**: a fea
 - **Scope is the only calibration lever.** A proof-of-concept and a regulated release use the *same* standard; the PoC simply scopes more out. **Contract-grade never weakens** — you apply it to a smaller surface, not a lower bar.
 - **Owned once, referenced everywhere.** Every contract — a capability, entity, endpoint, role, screen — lives in exactly one concern and is referenced by stable ID (`CAP-### · ENTITY-### · API-### · …`). Those IDs form one **traceability web** — `CAP → SCREEN → API → COMPONENT → ENV` — so a capability can't be built in one layer and forgotten in another.
 - **"Done" is fidelity-staged.** A developer's *merge gate* validates against the highest fidelity runnable locally (external dependencies may be substituted); a *release gate* validates against real infrastructure. The rule that keeps it honest: **your own code is always real; only external dependencies may be substituted** — mock S3, yes; bypass login, never.
-- **Build-ready** = every in-scope concern has reached Contract-grade. That is the handoff to implementation.
+- **Build-ready** = every in-scope concern has reached Contract-grade **and the set is published** (build markers stripped, status flipped, versions bumped). That is the handoff to implementation.
 
 ## Authored once, then maintained for life
 
@@ -44,6 +44,7 @@ A doc set is written ~once and **enhanced** for the rest of the product's life �
 | [`concerns/`](./concerns) | The 15 concern specifications (6 core, 2 baseline, 7 module). |
 | [`templates/`](./templates) | Fill-in skeletons: per-concern, single-file, the product-profile manifest, the binding map, and the build-status record. |
 | [`skills/`](./skills) · [`agents/`](./agents) | Advisory Claude Code tooling — 5 skills + 5 agents (see below). |
+| [`examples/`](./examples) | A complete worked example: the CLI validation product (trimmed and renamed), a published single-file doc set with resolvable bindings over a ~200-line product. |
 | [`ROADMAP.md`](./ROADMAP.md) | Open and deferred items (nothing blocking). |
 
 ## Using it
@@ -62,6 +63,10 @@ A doc set is written ~once and **enhanced** for the rest of the product's life �
 
 PoC vs production is a scoping decision, not a different process — narrow the scope, keep the bar.
 
+## Research companion
+
+Real-world trials, reference tooling (including a deterministic, CI-friendly gate checker), trial protocols, and a conformance fixture corpus live in a separate research project, **`dictum-lab`** — deliberately outside this repository and **non-normative**: this standard's text is the only definition of conformance, and the standard never depends on any tool. Findings flow back here only as distilled rules, through the versioned release process.
+
 ## The 15 concerns
 
 **Core (always):** Product & Requirements · Domain & Data · Architecture · Interfaces & Contracts · Quality & Testing · Delivery Process
@@ -70,16 +75,17 @@ PoC vs production is a scoping decision, not a different process — narrow the 
 
 ## Status & provenance
 
-**`v1.0.0`**. The standard is complete and validation-hardened across Parts 0–13: the full authoring method, the enhancement lifecycle *(10d)*, the doc-led implementation flow *(10e)*, brownfield reverse-authoring *(10f)*, the doc↔tracker boundary *(10c)*, and the advisory tool suite (5 skills + 5 agents).
+> **Version caveat — trust tags, not `main`.** The version numbers you see on the
+> latest commit of `main` (this section, the docs' front-matter `version:` fields)
+> describe a **working state** and can be ahead of, or simply wrong relative to,
+> any released version. The only authoritative versions of Dictum are the
+> **signed release tags and the exact commits they point to** — see
+> [`RELEASES.md`](./RELEASES.md) for how to verify one. Cite and build against a
+> release, not against `main`.
 
-It was distilled from a real AI-driven build study, then **validated by building** four deliberately different products:
+**`v1.1.0`**. The standard is complete and validation-hardened across Parts 0–13: the full authoring method, the enhancement lifecycle *(10d)*, the doc-led implementation flow *(10e)*, brownfield reverse-authoring *(10f)*, the doc↔tracker boundary *(10c)*, and the advisory tool suite (5 skills + 5 agents). v1.1.0 binds the **publish step** to the authoring gates (build-ready hands off a *published* set; implementation events never touch doc status — failure-mode #30), adds the **versioning policy**, names the two **machine-extraction extension points** (the in-code `DICT: <ID>` marker token; the register-form minting bar), adds the `CONFIG-###`/`OUT-###` contract kinds, the optional dual-realization binding, the vocabulary re-partition check + upgrade walk, and the worked example — full notes in [`RELEASES.md`](./RELEASES.md).
 
-- a **CLI**, looped to zero definition-friction;
-- a multi-user **record-management web app** with role-based access, authored as a doc set, then built and deployed on local Kubernetes;
-- a real-time, multi-tenant **messaging SaaS** exercising **all 15 concerns**, authored doc-first to Contract-grade, then built and **Verified** by a real-flow E2E on local Kubernetes (real OIDC login with no bypass, cross-replica WebSocket fan-out, and tenant isolation enforced on both the REST and the live event surface);
-- a **client-only browser voxel game** (pure JS/HTML, zero runtime dependencies), built doc-first through every slice and **Verified at merge fidelity** by real-flow Playwright E2E, with an honestly-waived hardware release gate.
-
-Each build fed refinements back into the bars — every one traceable to an observed failure in [`failure-mode-catalog.md`](./failure-mode-catalog.md). The worked examples throughout the standard are illustrations, not dependencies. Open and deferred items live in [`ROADMAP.md`](./ROADMAP.md).
+It was distilled from a real AI-driven build study, then **validated by building** four deliberately different products — a CLI, a multi-user record-management web app, a real-time multi-tenant messaging SaaS exercising all 15 concerns, and a client-only browser voxel game. Each build fed refinements back into the bars — every one traceable to an observed failure in [`failure-mode-catalog.md`](./failure-mode-catalog.md); the per-build validation write-ups live in the research companion (above). The worked examples throughout the standard are illustrations, not dependencies. Open and deferred items live in [`ROADMAP.md`](./ROADMAP.md).
 
 ## License
 

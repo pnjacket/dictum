@@ -1,0 +1,57 @@
+# Contract->Code Binding Map — jotdo (Dictum, STANDARD Part 10d).
+# CURRENT doc<->code correspondence only. An INDEX, not the contract.
+bindings:
+
+  COMPONENT-CLI:
+    locators:
+      - { path: jotdo.py, symbol: build_parser }
+      - { path: jotdo.py, symbol: main }
+
+  COMPONENT-STORE:
+    locators:
+      - { path: jotdo.py, symbol: load }
+      - { path: jotdo.py, symbol: save }
+
+  ENTITY-TASK:
+    locators:
+      - { path: jotdo.py, symbol: Task }
+    fields:                       # independent of manifest reference_granularity (adds drift precision)
+      id:      { path: jotdo.py, symbol: Task.id }
+      title:   { path: jotdo.py, symbol: Task.title }
+      done:    { path: jotdo.py, symbol: Task.done }
+      created: { path: jotdo.py, symbol: Task.created }
+
+  ENTITY-STORE:
+    locators:
+      - { path: jotdo.py, symbol: Store }
+    fields:
+      seq:   { path: jotdo.py, symbol: Store.seq }
+      tasks: { path: jotdo.py, symbol: Store.tasks }
+
+  INV-TASK-ID-UNIQUE:
+    asserted_by:
+      - { path: test_jotdo.py, symbol: test_ids_unique,
+          run: "python3 -m unittest test_jotdo.JotdoTest.test_ids_unique" }
+
+  INV-TASK-ID-MONOTONIC:
+    asserted_by:
+      - { path: test_jotdo.py, symbol: test_ids_monotonic,
+          run: "python3 -m unittest test_jotdo.JotdoTest.test_ids_monotonic" }
+
+  SEC-LOCAL-ONLY:
+    asserted_by:
+      - { path: test_jotdo.py, symbol: test_local_only,
+          run: "python3 -m unittest test_jotdo.JotdoTest.test_local_only" }
+
+  CLI-ADD:
+    locators:
+      - { path: jotdo.py, symbol: cmd_add }
+  CLI-LIST:
+    locators:
+      - { path: jotdo.py, symbol: cmd_list }
+  CLI-DONE:
+    locators:
+      - { path: jotdo.py, symbol: cmd_done }
+  CLI-RM:
+    locators:
+      - { path: jotdo.py, symbol: cmd_rm }

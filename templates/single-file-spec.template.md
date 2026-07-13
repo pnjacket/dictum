@@ -3,7 +3,7 @@ artifact: product-doc
 role: single-file-spec            # all in-scope concerns in one file (small products / CLIs)
 product: <Product Name>
 status: draft
-version: 0.1.0
+version: 0.2.0
 # Per-concern rung tracking lives in the manifest; this file holds the content.
 ---
 
@@ -12,7 +12,9 @@ version: 0.1.0
 <!-- BUILD: Single-file packaging for small products. Each concern below is a section instead of its own file.
      Keep the always-present concerns; add Module sections only if their trigger fires (see manifest).
      For each concern, consult ../concerns/11.x-*.md for sub-aspects, owned-contract IDs, and the Contract-grade bar.
-     Within each concern, fill: Purpose/Non-goals → Requirements → Contracts → Acceptance, as you climb rungs. -->
+     Within each concern, fill: Purpose/Non-goals → Requirements → Contracts → Acceptance, as you climb rungs.
+     Mint each owned ID on its REGISTER LINE (Part 5) — heading / first table cell / list item / paragraph
+     lead (typically bold), ID (backticked) before the first "—" or ":" — and only reference it everywhere else. -->
 
 ## 1. Product & Requirements
 <!-- BUILD: problem · personas (PERSONA-###) · success criteria (SUCCESS-###, measurable) · capability register (CAP-###) · non-goals -->

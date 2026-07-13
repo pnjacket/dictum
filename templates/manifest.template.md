@@ -2,7 +2,7 @@
 artifact: documentation-standard
 role: template
 status: draft
-version: 0.4.0
+version: 0.5.0
 ---
 
 # Product-Profile Manifest — Template
@@ -20,6 +20,13 @@ authoring_granularity: fine       # fine | grouped — the PRIMARY contract grai
                                   # contracts either way (owned-once at each level, linked by the reference web).
                                   # Granularity is a view over one linked structure, not a lossy roll-up (Part 10f).
                                   # May be overridden per-concern in a concern's front-matter.
+
+# OPTIONAL, recommended: the standard version this set was authored (or last re-partitioned) against.
+# When present, the doc-maturity-auditor's vocabulary re-partition check attributes any partition hole
+# to the version delta (authored-against vX vs vendored vY), and the upgrade walk (install-dictum
+# re-vendor path / doc-levelup) updates it after recording the in/out decision for each newly published
+# sub-aspect key. Absent, those tools still run — findings just carry no version attribution.
+# authored_against: <standard version, e.g. 1.1.0>
 
 # Optional. Present only when the set was REVERSE-AUTHORED from existing code (Part 10f, doc-excavate)
 # rather than authored doc-first — so consumers know it is an as-built baseline whose intent-level

@@ -1,0 +1,43 @@
+# Product-Profile Manifest — jotdo (Dictum, STANDARD Part 7)
+# Single source of truth for scope + rungs. Authored at intake.
+product: jotdo
+packaging: single-file
+authoring_granularity: fine
+
+traits:
+  interface_kinds: [cli]
+  interactive_ui: false
+  deployed_service: false
+  persists_data: true            # → deepens Domain & Data (local JSON store)
+  third_party_deps: false        # stdlib only
+  perf_scale_needs: false
+  multi_locale: false
+  commercial: false
+  regulated: false
+  security_risk: []              # local single-user CLI; no auth/pii/payments/network
+
+# All in-scope concerns target Contract-grade. No Module concerns triggered.
+# out_of_scope_subaspects entries are the published `key` column of each concern
+# spec's Sub-aspects table (STANDARD Part 9). Kind per entry (absent | deferred)
+# is recorded with its justification in the doc's per-concern Non-goals.
+concerns:
+  product-and-requirements:  { in_scope: true,  current_rung: contract-grade, target_rung: contract-grade, out_of_scope_subaspects: [market-competitive-context, stakeholders-decision-makers, risks] }
+  domain-and-data:           { in_scope: true,  current_rung: contract-grade, target_rung: contract-grade, out_of_scope_subaspects: [migrations-versioning, consistency-transactions, reference-seed-data] }
+  architecture:              { in_scope: true,  current_rung: contract-grade, target_rung: contract-grade, out_of_scope_subaspects: [boundaries-isolation-model, cross-cutting-patterns, logical-deployment-topology, scalability-resilience-patterns] }
+  interfaces-and-contracts:  { in_scope: true,  current_rung: contract-grade, target_rung: contract-grade, out_of_scope_subaspects: [http-rpc-api-surface, library-sdk-surface, event-surface, ui-entrypoints, versioning-compatibility, pagination-filtering-rate-limit-conventions] }
+  quality-and-testing:       { in_scope: true,  current_rung: contract-grade, target_rung: contract-grade, out_of_scope_subaspects: [specialized-testing, test-stage-fidelity-mapping, manual-exploratory] }
+  delivery-process:          { in_scope: true,  current_rung: contract-grade, target_rung: contract-grade, out_of_scope_subaspects: [external-tracker-binding, branching-release-versioning] }
+  security-and-privacy:      { in_scope: true,  current_rung: contract-grade, target_rung: contract-grade, out_of_scope_subaspects: [authentication-mechanism, authorization, session-management, data-protection-mechanisms-per-sensitive-field, encryption] }
+  governance-and-compliance: { in_scope: true,  current_rung: contract-grade, target_rung: contract-grade, out_of_scope_subaspects: [data-handling-policy, audit-requirements, compliance-framework-mapping, records-retention-data-residency, consent-management] }
+  user-experience:           { in_scope: false }   # no interactive UI (CLI only)
+  operations-and-infrastructure: { in_scope: false }   # not a deployed service
+  observability-and-monitoring:  { in_scope: false }   # not a deployed service
+  integrations-and-external-dependencies: { in_scope: false }   # no third-party deps
+  performance-and-scalability:   { in_scope: false }   # no perf/scale needs
+  accessibility-and-internationalization: { in_scope: false }   # no UI; single locale
+  business-and-legal:        { in_scope: false }   # non-commercial
+
+# Enhancement lifecycle (Part 10d) — current state only; history in git.
+reference_granularity: entity     # reverse-reference propagation granularity (independent of binding-map field locators)
+tombstones: {}
+staleness: {}

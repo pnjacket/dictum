@@ -3,7 +3,7 @@
 Dictum is licensed in **two parts, by content type**. Which license applies to
 a file depends on what the file *is*. The rule is by directory:
 
-> **Files under `skills/`, `agents/`, and `templates/` are MIT.**
+> **Files under `skills/`, `agents/`, `templates/`, and `examples/` are MIT.**
 > **Every other file (the standard's prose) is CC BY 4.0.**
 
 ---
@@ -46,16 +46,19 @@ is not even an adaptation of the text — you may use the method freely, write y
 own product's docs with it, ship products built from those docs, and build tools
 around it, with no obligation at all.
 
-## 2. The tooling and templates (code) — MIT
+## 2. The tooling, templates and examples (sample material) — MIT
 
-The Claude Code tooling and the fill-in templates are licensed under the **MIT
-License**.
+The Claude Code tooling, the fill-in templates, and the worked examples are
+licensed under the **MIT License**.
 
 - Full text: [`LICENSES/MIT.txt`](LICENSES/MIT.txt) (also copied into each of
-  `skills/`, `agents/`, and `templates/` so it travels with the files when they
-  are copied into your own repository).
+  `skills/`, `agents/`, `templates/`, and `examples/` so it travels with the
+  files when they are copied into your own repository).
 
-**Covered:** everything under `skills/`, `agents/`, and `templates/`.
+**Covered:** everything under `skills/`, `agents/`, `templates/`, and
+`examples/`. A worked example is sample material through and through — the
+sample doc set as much as the sample code — so the whole directory is MIT
+rather than split by file type.
 
 These are meant to be copied into your own repositories and adapted. MIT lets
 you do that with attribution and no further obligation.
@@ -83,6 +86,6 @@ Origin sign-off. Contributors retain copyright in their contributions.
 ### SPDX summary
 
 - Prose: `CC-BY-4.0`
-- Tooling and templates (`skills/`, `agents/`, `templates/`): `MIT`
+- Tooling, templates and examples (`skills/`, `agents/`, `templates/`, `examples/`): `MIT`
 
 When in doubt about a specific file, this document governs.

@@ -2,7 +2,7 @@
 artifact: documentation-standard
 role: guide
 status: published
-version: 1.0.0
+version: 1.1.0
 audience: [ai-implementer, human-team]
 ---
 
@@ -37,7 +37,7 @@ Two constants across every journey (STANDARD Part 3): **Contract-grade** is the 
 2. [`doc-levelup`](skills/doc-levelup/SKILL.md) — raise each concern toward Contract-grade, **foundational first**: Product & Requirements → Domain / Architecture → Interfaces → downstream.
 3. [`doc-maturity-auditor`](agents/doc-maturity-auditor.md) — rungs vs claims, gaps, cross-reference integrity, build-ready verdict.
 
-**Gate** — build-ready: every in-scope concern Contract-grade. Hand off to implementation (Workflow 4 covers the first build).
+**Gate** — build-ready: every in-scope concern Contract-grade **and the set published** (the Part 6 publish step — the auditor flags it if owed). Hand off to implementation (Workflow 4 covers the first build).
 **See** — STANDARD Part 10 (Intake → Scaffold → Author-to-rung → Review → Publish), Part 10b.
 
 ## 2. Adopt Dictum on an existing repo (brownfield)
@@ -71,12 +71,12 @@ Two constants across every journey (STANDARD Part 3): **Contract-grade** is the 
 
 **When** — add or change a capability on a live doc set (the doc→code direction).
 
-1. [`doc-feature`](skills/doc-feature/SKILL.md) — author the feature **delta** to Contract-grade in the owning concern(s), classify it (emit the `doc-edit` change event), and stub the binding map. *(A request in an external tracker — a **demand-role** item — is a valid intake trigger: it seeds this interview (Part 0.6), never substitutes for it, and is not built until it references a Contract-grade repo ID. Doc↔tracker boundary: Delivery Process 11.6, STANDARD Part 10c.)*
+1. [`doc-feature`](skills/doc-feature/SKILL.md) — author the feature **delta** to Contract-grade in the owning concern(s), classify it (emit the `doc-edit` change event), stub the binding map, and **re-publish the touched docs** (Part 6 — the delta's final authoring act). *(A request in an external tracker — a **demand-role** item — is a valid intake trigger: it seeds this interview (Part 0.6), never substitutes for it, and is not built until it references a Contract-grade repo ID. Doc↔tracker boundary: Delivery Process 11.6, STANDARD Part 10c.)*
 2. [`implementation-planner`](agents/implementation-planner.md) — turn the delta into an **ordered vertical-slice build plan** with code sites, required tests, and the fidelity-staged DoD.
 3. **Delivery builds** the slices (human or AI) — not a Dictum tool; the plan is advisory.
 4. [`drift-detector`](agents/drift-detector.md) — confirms the loop closed (new bindings resolve, coverage tests pass, staleness clears).
 
-**Gate** — the delta's contracts reach **Verified** (Delivery), staleness cleared.
+**Gate** — the delta's contracts reach **Verified** (Delivery), staleness cleared. (Doc status is untouched here — the docs re-published back at step 1; loop closure moves build-status, never `status:`.)
 **See** — STANDARD Part 10e.
 
 ## 5. Keep docs true over time

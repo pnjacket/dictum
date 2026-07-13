@@ -2,7 +2,7 @@
 artifact: documentation-standard
 role: template
 status: draft
-version: 0.4.0
+version: 0.5.0
 ---
 
 # Contract→Code Binding Map — Template
@@ -31,6 +31,15 @@ bindings:
     locators:
       - { path: src/app/users/user-detail.component.ts, symbol: UserDetailComponent }
 
+  ENTITY-PROJECT:                            # OPTIONAL dual-realization form: one LOGICAL contract realized
+    locators:                                # in TWO languages, bridged by a serialization convention
+      - { path: src/models/project.py,    symbol: Project, role: producer }   # backend DTO class
+      - { path: web/src/types/project.ts, symbol: Project, role: consumer }   # hand-written frontend interface
+    wire:                                    # the wire-serialization sub-contract the two realizations meet on —
+      casing: camelCase                      #   field casing on the wire (each side maps its own idiom to this)
+      enums: string-names                    #   enum representation (string names vs ordinals)
+      dates: iso-8601-utc                    #   date/time representation (format vs epoch)
+
   INV-USER-EMAIL-UNIQUE:                      # a SEMANTIC contract binds to its assertion — and a STRUCTURAL
     locators:                                 # invariant MAY also bind its ENFORCEMENT SITE (dual shape):
       - { path: db/schema.sql, symbol: users }                  # the constraint / transaction scope that enforces it
@@ -58,6 +67,7 @@ coverage:
 
 - **Doc end** — every key resolves to a stable ID owned by an **in-scope, Contract-grade+** concern. Unknown ID → error; sub-Contract-grade or out-of-scope → warning (premature binding); **tombstoned** ID → error (the binding must be dropped on retirement).
 - **Code end** — every `path` exists and every `symbol`/`asserted_by` resolves within it (use the `asserted_by.run` selector to execute the test). A locator that no longer resolves is a **dangling binding** → reported as a `binding-stale` finding (a defect in the index itself, not a code↔doc drift; fix or retire the binding). Locators point at **own code** (real), never at a substituted external dependency (Part 10a substitution rule). An `asserted_by.symbol` must match the **actual test title (or declared symbol) verbatim**; a substring/elided label that still uniquely matches is a **hygiene warning**, and one matching no test is a dangling binding. The **`run:` selector's filter may legitimately be an abbreviated-but-uniquely-matching substring** (idiomatic with `vitest -t 'partial title'` / `pytest -k`); that is fine as long as it resolves to exactly one test and the `symbol` itself stays verbatim.
+- **Dual realization (optional extension).** When one contract's locators span **two languages/runtimes** (a backend DTO class + a hand-written frontend interface realizing the same logical contract), tag each locator with `role: producer|consumer` and declare a **`wire:` sub-contract** — the serialization convention the two sides meet on (field casing / enum representation / date format). Validation then compares **each realization against the declared wire form, never one realization against the other directly** — a field renamed on either side, or an enum/date represented off-convention, is a drift finding *at that end*, even while both sides type-check green in their own language (failure-mode #31). Same-language multi-locator bindings (an ORM model + its storage schema, as `ENTITY-USER` above) need neither `role` nor `wire`. A dual-realization binding without a `wire:` block is a **hygiene warning** — the two ends have nothing declared to be checked against.
 - **INV bindings — dual shape, arms, deferral.** A structural `INV-###` may bind **both** `locators` (the enforcement site — schema constraint, transaction scope) **and** `asserted_by` (the observing test); each evidences a different thing, validate both ends. A **multi-arm** invariant may carry one `asserted_by` entry per arm, labeled with the verbatim arm token. An assertion that lands with a later slice is recorded as a deferral on the binding — `asserted_by owed by slice N` — keeping "realized but not yet asserted" visible instead of silently unbound.
 - **Coverage** — by default every in-scope Contract-grade+ contract of a **code-realizable kind** has ≥1 binding; a missing one is a **coverage gap** (drift there can't be detected, only flagged, by the `doc-maturity-auditor`). A map MAY declare a **curated subset** for a kind via the top-level `coverage:` block above: a kind under `fully_bound` keeps the bind-all rule (an unbound member is a real gap); a kind under `curated` is intentionally partial, so its unbound members are **not** flagged — but the declaration must state *why* (so curation is a recorded decision, not an oversight). A kind that is **neither** declared nor fully bound defaults to `fully_bound` — silence means bind-all, so every curation is explicit. This resolves "is a partial binding a gap or intentional?": the map answers it.
 - **Hygiene** — one code locator realizing two different contract IDs → warning (possible owned-twice smell).
@@ -70,4 +80,4 @@ coverage:
 
 ## Ownership & lifecycle
 
-Authored **during the build** — the slice that realizes a contract records its binding (Delivery Process territory) — and **validated continuously** by the lifecycle tooling that consumes it. A lightweight complement is a **build-time in-code ID annotation** (a `// DICT: <ID>` tag at the realizing code site): it carries the same ID→code link *in the source*, always in sync and human-visible, and is what lets a later code→doc reverse-authoring pass (Part 10f) **recover** the author's own IDs instead of coining fresh ones. The binding map remains the machine-readable index the detector consumes; the in-code tag is the durable, drift-proof hint. A binding is **removed when its contract is tombstoned**, alongside the retirement precondition (Part 10d). The map holds *current* correspondence only; history rides on git.
+Authored **during the build** — the slice that realizes a contract records its binding (Delivery Process territory) — and **validated continuously** by the lifecycle tooling that consumes it. A lightweight complement is a **build-time in-code ID annotation** (the `DICT: <ID>` marker token in a host-language comment at the realizing code site — the token grammar is fixed, the comment syntax is the language's own): it carries the same ID→code link *in the source*, always in sync and human-visible, and is what lets a later code→doc reverse-authoring pass (Part 10f) **recover** the author's own IDs instead of coining fresh ones. The binding map remains the machine-readable index the detector consumes; the in-code tag is the durable, drift-proof hint. A binding is **removed when its contract is tombstoned**, alongside the retirement precondition (Part 10d). The map holds *current* correspondence only; history rides on git.

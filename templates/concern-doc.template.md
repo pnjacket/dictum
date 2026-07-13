@@ -9,7 +9,7 @@ in-scope-subaspects: []           # OPTIONAL readout, DERIVED = (concern's publi
                                   # Sub-aspects scoped out (per the manifest) go in Non-goals below.
 current-rung: sketch              # absent|sketch|specified|contract-grade  (Verified is tracked by Delivery)
 status: draft                     # draft|published
-version: 0.1.0
+version: 0.2.0
 ---
 
 # <Concern Name> — <Product Name>
@@ -37,7 +37,9 @@ version: 0.1.0
 <!-- BUILD: Decision + rationale table. Cross-cutting decisions go in Architecture's ADR-### register instead. -->
 
 ## Contracts                  <!-- rung: Contract-grade -->
-<!-- BUILD: The contracts this concern OWNS, by stable ID (see the spec's ID scheme). Each entry complete enough to build/reference. -->
+<!-- BUILD: The contracts this concern OWNS, by stable ID (see the spec's ID scheme). Each entry complete enough to build/reference.
+     Mint each owned ID on its REGISTER LINE (Part 5): a heading, a table row (ID in the first cell), a list item,
+     or a paragraph lead (typically bold) — the ID (backticked) before the first "—" or ":". Everywhere else, reference only. -->
 
 ## Acceptance criteria        <!-- rung: Contract-grade — testable & unambiguous; each maps to an observable check -->
 <!-- BUILD: Meet the concern's Contract-grade bar (in its spec). Every criterion must be checkable. -->
