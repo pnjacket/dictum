@@ -37,8 +37,9 @@ A doc set is written ~once and **enhanced** for the rest of the product's life �
 
 | Path | What |
 |---|---|
-| [`STANDARD.md`](./STANDARD.md) | The standard itself — Parts 0–13. **Start here.** |
-| [`WORKFLOWS.md`](./WORKFLOWS.md) | The end-to-end journeys — which tool, in what order, to what gate. |
+| [`STANDARD.md`](./STANDARD.md) | The standard itself — Parts 0–13. The normative reference. |
+| [`TUTORIAL.md`](./TUTORIAL.md) | The human on-ramp — walk the worked example end to end in ~20 minutes. |
+| [`WORKFLOWS.md`](./WORKFLOWS.md) | The end-to-end journeys — which tool, in what order, to what gate — each naming the operator's part vs the tooling's. |
 | [`GLOSSARY.md`](./GLOSSARY.md) | The full vocabulary. |
 | [`failure-mode-catalog.md`](./failure-mode-catalog.md) | Each rule tied to the real failure it prevents. |
 | [`concerns/`](./concerns) | The 15 concern specifications (6 core, 2 baseline, 7 module). |
@@ -49,9 +50,9 @@ A doc set is written ~once and **enhanced** for the rest of the product's life �
 
 ## Using it
 
-**New here?** [`WORKFLOWS.md`](./WORKFLOWS.md) is the fastest start — it maps each journey (new product · adopt on an existing repo · close gaps · ship a feature doc-first · keep docs true) to the exact tool sequence and the gate that ends it.
+**New here?** Start with [`TUTORIAL.md`](./TUTORIAL.md) — it walks the worked example ([`examples/jotdo/`](./examples/jotdo)) from a two-sentence brief to a published, build-ready doc set in about twenty minutes. Then [`WORKFLOWS.md`](./WORKFLOWS.md) maps each journey (new product · adopt on an existing repo · close gaps · ship a feature doc-first · keep docs true) to the exact tool sequence and the gate that ends it.
 
-**Read** [`STANDARD.md`](./STANDARD.md) for the method, then the relevant [`concerns/`](./concerns) specs for the areas you care about.
+**Who reads what.** The normative text — [`STANDARD.md`](./STANDARD.md) and the [`concerns/`](./concerns) specs — is a dense reference, optimized for completeness and auditability; in practice it is consumed mostly by tooling and AI assistants, and by humans as a lookup rather than a cover-to-cover read. Humans learn the method fastest by doing (the tutorial), and thereafter mostly read conforming *doc sets*, which are written for people. The division of labor behind this — intent and judgment are the operator's, the clerical layer is the tooling's, and the standard's honest limits are stated rather than patched — is a first principle: STANDARD Part 0.7.
 
 **Run it in Claude Code** — the tooling is advisory (it assists, never blocks). Install it into a product repo with the `install-dictum` skill (run from this checkout), then reach for:
 

@@ -9,6 +9,7 @@ Dictum is a product-agnostic **standard for build-ready software documentation**
 ## Repo map
 
 - `STANDARD.md` — the standard, Parts 0–13. The source of truth for the method.
+- `TUTORIAL.md` — the human on-ramp (authors the worked example by hand, end to end). `WORKFLOWS.md` — the journey index: tool sequences per situation, each naming the operator's part vs the tooling's.
 - `GLOSSARY.md` — the vocabulary.
 - `failure-mode-catalog.md` — each rule tied to the real failure it prevents.
 - `concerns/11.1`–`11.15` — the 15 concern specifications (STANDARD Part 11): 6 core, 2 baseline, 7 module.

@@ -12,6 +12,8 @@ The end-to-end journeys through Dictum — **which tool, in what order, to what 
 
 This page is an **index, not a re-specification**. Each workflow *sequences* the tools and points into the authoritative method (`STANDARD.md`, its Part 10x flows) and the individual tool procedures (`skills/`, `agents/`). Owned-once (STANDARD Part 5) applies to Dictum's own docs too — the steps live in the tools and the standard; this page only orders them. All tooling is **advisory: it assists, never blocks** (STANDARD Part 10b).
 
+**Who does what.** Every journey divides the same way (STANDARD Part 0.7): the **operator** supplies intent and judgment — interview answers, scope calls (`absent` vs `deferred`), adjudications, waiver acceptances, review of what changed — and the **tooling** carries the clerical layer — drafting, ID-web wiring, manifest⇄index sync, propagation, publish mechanics, audits. Each workflow below names *your part*; the tools do the rest. What no tool can supply is the quality of your part: the gates check artifacts, never attention.
+
 **First:** install the tooling into your product repo with the **[`install-dictum`](skills/install-dictum/SKILL.md)** skill (run it from the Dictum checkout, targeting your repo).
 
 ## Pick your starting point
@@ -37,6 +39,7 @@ Two constants across every journey (STANDARD Part 3): **Contract-grade** is the 
 2. [`doc-levelup`](skills/doc-levelup/SKILL.md) — raise each concern toward Contract-grade, **foundational first**: Product & Requirements → Domain / Architecture → Interfaces → downstream.
 3. [`doc-maturity-auditor`](agents/doc-maturity-auditor.md) — rungs vs claims, gaps, cross-reference integrity, build-ready verdict.
 
+**Your part** — the free-form brief; every interview round (to saturation, or you call it); confirming the derived scope; reviewing what the auditor flags. The skills write the manifest, the doc set, and the index.
 **Gate** — build-ready: every in-scope concern Contract-grade **and the set published** (the Part 6 publish step — the auditor flags it if owed). Hand off to implementation (Workflow 4 covers the first build).
 **See** — STANDARD Part 10 (Intake → Scaffold → Author-to-rung → Review → Publish), Part 10b.
 
@@ -49,6 +52,7 @@ Two constants across every journey (STANDARD Part 3): **Contract-grade** is the 
 3. Close the markers → **Workflow 3**.
 4. Optional, immediately possible: [`drift-detector`](agents/drift-detector.md) — the bootstrap binding map lets you check code↔doc drift from day one.
 
+**Your part** — the confirm-and-fill interview: confirm or correct each `[ASSUMPTION]`, and supply the intent no code carries (personas, threat model, targets, `absent` vs `deferred`). The tools extract, draft, and bind.
 **Gate** — a baseline is deliberately **not** build-ready (Sketch/Specified). It hands off to Workflow 3. *(Adopting a regenerated set onto an existing web owes the Part 10f ID-reconciliation step.)*
 **See** — STANDARD Part 10f.
 
@@ -64,6 +68,7 @@ Two constants across every journey (STANDARD Part 3): **Contract-grade** is the 
 3. [`doc-levelup`](skills/doc-levelup/SKILL.md) per concern — interview-fill the missing intent, author it, wire the ID web, clear the resolved markers. Use the [`concern-specialist`](agents/concern-specialist.md) agent for heavy concerns (threat model, UX, domain). Order dependency-first.
 4. Re-run the auditor until build-ready.
 
+**Your part** — every marker resolution is a decision: confirm or correct, fill or scope out, adjudicate. The skill authors what you decide.
 **Gate** — every in-scope concern Contract-grade, no open blocking markers.
 **See** — STANDARD Parts 3, 4, 6, 9. *(The intent layer — personas, threat model, targets, commercial model, `absent`-vs-`deferred` — is closed by a human, by design: no code artifact carries it.)*
 
@@ -76,6 +81,7 @@ Two constants across every journey (STANDARD Part 3): **Contract-grade** is the 
 3. **Delivery builds** the slices (human or AI) — not a Dictum tool; the plan is advisory.
 4. [`drift-detector`](agents/drift-detector.md) — confirms the loop closed (new bindings resolve, coverage tests pass, staleness clears).
 
+**Your part** — the feature's intent (the delta interview), sanity-checking the classification, and accepting the slice plan. Delivery — human or AI — builds.
 **Gate** — the delta's contracts reach **Verified** (Delivery), staleness cleared. (Doc status is untouched here — the docs re-published back at step 1; loop closure moves build-status, never `status:`.)
 **See** — STANDARD Part 10e.
 
@@ -87,6 +93,7 @@ Two constants across every journey (STANDARD Part 3): **Contract-grade** is the 
 - **Suspected code drift** → [`drift-detector`](agents/drift-detector.md) — emits candidate `drift` change events; **you adjudicate** each: *doc-stale* → hand to `doc-change-impact`; *code-defect* → the code tracker; *divergent* → split.
 - **A bug filed in an external tracker** → a **triage-role** item: an externally-sourced, unadjudicated `drift`-type event that stays **repo-invisible until reproduced** (no marker, no staleness before then). On adjudication: *can't-reproduce* → tracker-only; *code-defect* → revoke `Verified` via a regression case, contract text untouched; *doc-defect* → it becomes demand (→ Workflow 4 / `doc-change-impact`). Doc↔tracker boundary: STANDARD Part 10c.
 
+**Your part** — adjudication: every drift event's verdict (*doc-stale* / *code-defect* / *divergent*) is yours, never the detector's.
 **Gate** — staleness does **not** lower a rung (the verification record stands) but **blocks the release gate** until reconciled or waived.
 **See** — STANDARD Part 10d.
 
@@ -96,6 +103,7 @@ Two constants across every journey (STANDARD Part 3): **Contract-grade** is the 
 
 - [`doc-maturity-auditor`](agents/doc-maturity-auditor.md) (read-only, never edits) — actual rung vs claimed per concern, gaps to the target rung, dangling references, README↔manifest consistency, and the overall build-ready verdict.
 
+**Your part** — read the report; it is deliberately decision-sized (rung gaps, open markers, the verdict).
 **See** — STANDARD Parts 3, 7.
 
 ---
