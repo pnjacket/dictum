@@ -1,0 +1,86 @@
+name: Failure-mode report
+description: Report a failure the Dictum standard did not prevent — a gap in what conformance means.
+title: "[failure-mode] "
+labels: ["failure-mode", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting — findings from real builds are how the standard hardens.
+
+        **Before you write anything: describe by shape.** This tracker is **public**, and a filed issue is effectively **permanent** (indexed, cached, forkable — deleting it later does not un-publish it). Name **no** real product, company, or person, and **no** domain-identifying specifics (function / entity / field names, or regulated-domain terms). Describe the product **only by its shape** (e.g. "an MIT-licensed, LLM-built data-grid library"). **Keep concrete evidence in your own repo** — do not paste it here.
+
+        The **`report-failure-mode`** skill (installed with the Dictum tooling) generates a report in this exact shape with the scrub already applied — running it first is the easiest way to get this right.
+  - type: input
+    id: reported-from
+    attributes:
+      label: Reported from (by shape)
+      description: The product described by shape only — never its name.
+      placeholder: e.g. an MIT-licensed, LLM-built TypeScript data-grid
+    validations:
+      required: true
+  - type: input
+    id: standard-version
+    attributes:
+      label: Standard version in use
+      placeholder: e.g. v1.1.0 (vendored)
+    validations:
+      required: true
+  - type: input
+    id: concerns
+    attributes:
+      label: Concerns implicated
+      description: By number + sub-aspect key, if you can.
+      placeholder: e.g. 11.8 (license-ip-compliance); 11.15 (ip-trademark-constraints)
+    validations:
+      required: false
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - High — shipped a defect/violation while the standard's checks reported "clear"
+        - Medium — a real gap, caught before shipping
+        - Low — a rough edge or clarity gap
+    validations:
+      required: true
+  - type: textarea
+    id: observed-failure
+    attributes:
+      label: Observed failure
+      description: What happened, what the standard-prescribed checks reported, and how it was actually caught.
+    validations:
+      required: true
+  - type: textarea
+    id: root-cause
+    attributes:
+      label: Root cause
+      description: Why the standard let it through — a scope-framing gap, a model/assumption gap, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: preventing-mechanism
+    attributes:
+      label: Preventing mechanism (proposed)
+      description: |
+        Concrete, and respecting Dictum's design: scope is the only calibration lever; owned-once; tooling is advisory and the standard defines extension points, not tools (detectors belong in the research companion); prefer an additive vocabulary change over a rename; name the honest limit rather than over-promising a gate.
+    validations:
+      required: false
+  - type: textarea
+    id: catalog-entry
+    attributes:
+      label: Suggested failure-mode-catalog entry
+      description: A single table row, matching the catalog format.
+      placeholder: "| # | Observed failure | Root cause | Preventing mechanism (where) |"
+      render: markdown
+    validations:
+      required: false
+  - type: checkboxes
+    id: describe-by-shape
+    attributes:
+      label: Describe-by-shape (required before this can be filed)
+      options:
+        - label: This report names no real product, company, or person, and no domain-identifying specifics (function / entity / field names, regulated-domain terms) — the product is described only by shape.
+          required: true
+        - label: Concrete evidence stays in my own repo; I have not pasted it here.
+          required: true

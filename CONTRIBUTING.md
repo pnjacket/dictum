@@ -99,6 +99,38 @@ By making a contribution to this project, I certify that:
 4. Reference contracts by ID; never duplicate a contract another concern owns.
 5. Commit with `git commit -s` and open a pull request.
 
+## Reporting a failure mode
+
+The strongest contributions come from **real builds** — a failure the standard
+did not prevent. Every rule in Dictum traces to an observed failure
+([`failure-mode-catalog.md`](failure-mode-catalog.md)), and that catalog grows
+from reports like yours.
+
+1. If you can, run the **`report-failure-mode`** skill (installed with the Dictum
+   tooling). It interviews you and produces a structured report — observed
+   failure, root cause, a proposed preventing mechanism, and a draft catalog row
+   — with the describe-by-shape scrub already applied.
+2. File it as a new issue using the **Failure-mode report** template; the form
+   mirrors that shape.
+
+**Describe by shape — this is load-bearing, and for the maintainer it is legal.**
+The tracker is public and a filed issue is effectively permanent. Name **no**
+real product, company, or person, and **no** domain-identifying specifics
+(function / entity / field names, regulated-domain terms) — describe the product
+only by its shape, and **keep concrete evidence in your own repo**. The issue
+form requires you to confirm this before it can be filed; the maintainer also
+scans on triage, but the first responsibility is the submitter's. (This is
+[`EDITORIAL.md`](EDITORIAL.md) Part 3 applied at the public boundary.)
+
+**What happens next.** A report is a *hypothesis*, not a change — nothing you
+file alters the standard until the maintainer **adjudicates** it (the same
+triage-then-write discipline the standard applies to external trackers, Part
+10c). If it is accepted, the distilled rule lands as a **catalog entry** and
+ships in a **versioned release** with a named re-conformance step — which your
+own doc set then picks up through the upgrade walk. Executable detectors, where
+warranted, live non-normatively in the research companion (`dictum-lab`), never
+in the standard.
+
 ## Questions
 
 Open an issue. For anything about the name or conformance claims, see
