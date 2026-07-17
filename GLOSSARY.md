@@ -44,6 +44,8 @@ Terms used across the Documentation Standard and the concern specs.
 - **Build marker** — `<!-- BUILD: ... -->`; about *maturing the document*; stripped on publish.
 - **Draft / Published** — a doc's `status`; `published` is a consumable-state claim (safe to build from), not extra maturity. The **publish step** (strip build markers · flip status · bump version) is **gate-bound on authoring events only**: the build-ready gate hands off a published set, a material edit re-drafts the touched doc, and the delta's hand-off re-publishes it — implementation events never touch `status:` (Std Part 6, 10, 10e).
 - **Product-profile manifest** — the single machine-readable source of truth (traits, in-scope concerns/sub-aspects, locations, rungs, status); the human index is derived from it.
+- **`authored_against` (manifest)** — the signed release **tag** a doc set was authored (or last re-partitioned) against: its provenance anchor and the **start line** for an upgrade walk. Stamped by `doc-scaffold` at creation, advanced by the upgrade walk; survives re-vendoring. Recommended, not required — absent, a large-gap upgrade must guess its start (Std `RELEASES.md`).
+- **`standard_source` (manifest)** — optional best-effort location to fetch the standard when no local copy is kept — a breadcrumb, not a resolver. The canonical location may move, so a local copy is the only guaranteed-durable path (Std `RELEASES.md`).
 - **Trait / Trigger** — a product characteristic (has-UI, persists-data, multi-tenant, …) that switches modules on.
 
 ## Enhancement lifecycle
