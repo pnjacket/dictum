@@ -24,8 +24,8 @@ Each tagged release is:
 1. **Published from the canonical repository** as an annotated, **signed git tag**
    (`git tag -s vX.Y.Z`), so the tag's provenance is cryptographically verifiable.
 2. Accompanied by a **`SHA256SUMS`** manifest covering the normative files
-   (`STANDARD.md`, `GLOSSARY.md`, `failure-mode-catalog.md`, `concerns/`), so any
-   copy can be checked against the official hashes.
+   (`STANDARD.md`, `GLOSSARY.md`, `failure-mode-catalog.md`, `concerns/`,
+   `EDITORIAL.md`), so any copy can be checked against the official hashes.
 
 To verify a copy that claims to be Dictum v*X*:
 
@@ -55,6 +55,62 @@ Version numbers follow semantic versioning, calibrated to what a bump means for 
   step is how an upgrade silently strands existing doc sets.
 - **PATCH** — editorial or clarifying changes only; no bar, gate, or vocabulary
   change.
+
+## The standard as a version-pinned dependency
+
+A doc set consumes the standard the way code consumes a locked dependency:
+
+- **Identity is a signed tag.** A set records the version it was authored (or
+  last re-partitioned) against as that tag, in its manifest `authored_against:`
+  — stamped by `doc-scaffold` at creation and advanced by the upgrade walk
+  (`install-dictum` / `doc-levelup`). It is the **start line** an upgrade uses —
+  recommended and stamped by default; absent, a large-gap walk must guess its
+  start — and it survives re-vendoring: the local copy is overwritten on upgrade;
+  the manifest field is not.
+- **Resolution is local-first; there is no resolver.** Tools read the standard
+  from a local copy (a vendored `dictum/` cache) when present; with none, they
+  may fetch the recorded tag from an optional **`standard_source`** (plain git —
+  the standard ships no resolver). A local copy is optional but the only
+  **guaranteed-durable** path: the canonical location is deliberately unpinned
+  (name/repo may move — `TRADEMARK.md`), so the online path is best-effort, and
+  with neither a local copy nor a `standard_source` there is no fallback. An
+  **upgrade** is the exception to local-first — it resolves the *target* tag
+  explicitly (re-vendored, or fetched at the target), never the pinned old copy.
+- **These release notes are the re-conformance record, and they are
+  append-only.** The named re-conformance step per release (below) is the
+  authored migration knowledge a text diff cannot reconstruct, so entries are
+  **never pruned, even across a MAJOR**. Any tag's checkout therefore carries the
+  cumulative steps, and a large-gap walk (say `v1.x → v4.x`) is the *sequence* of
+  the intervening releases' steps, read between `authored_against` and the target
+  tag. Raw text diffs are **not** stored — `git diff <tag>..<tag>` computes them.
+- **Provenance is best-effort, by intent.** The signature and `SHA256SUMS` let
+  anyone who wants confirm a copy is the canonical text — but **no tool gates on
+  integrity, and none should be added.** Copies, private internal use, and forks
+  are expected and uncontrolled; a fork simply carries its own tags and
+  `standard_source`. This looseness is deliberate — like the standard's own
+  Part 0.7 honest limits, it is named here precisely so a later contributor does
+  not "harden" it back into a control the project has chosen not to exert.
+
+## Lab citation pinning
+
+The standard may cite the research companion (`dictum-lab`) **non-normatively**,
+for deeper insight, by a stable **lab anchor** (`LAB-*`, registered in
+`dictum-lab/ANCHORS.md`). Two rules keep this from compromising provenance or
+the one-authoritative-version guarantee:
+
+- **The standard never *depends* on the lab.** Citations are non-normative;
+  every rule is followable from the standard alone (`EDITORIAL.md` Part 2). No
+  bar, gate, or procedure links to lab content.
+- **Standard `vX` cites the lab at the identically-versioned signed lab tag,**
+  cut together from consistent states. A signed lab tag resolves to a specific
+  lab commit — the same integrity a raw SHA would give — so a released citation
+  is verifiable against exactly that state, human-readably, with no separate pin
+  table to maintain. Between releases the two repos are **unpinned** (main is
+  working state, per above); a citation is authoritative only at a signed
+  release. Only the cited **narrative content** (studies, concern-notes) moves
+  in step with the standard this way; the lab's **tools** keep their own
+  development cadence — they are never anchor-cited, so their iteration never
+  touches the join.
 
 ## Release notes
 

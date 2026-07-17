@@ -21,12 +21,22 @@ authoring_granularity: fine       # fine | grouped — the PRIMARY contract grai
                                   # Granularity is a view over one linked structure, not a lossy roll-up (Part 10f).
                                   # May be overridden per-concern in a concern's front-matter.
 
-# OPTIONAL, recommended: the standard version this set was authored (or last re-partitioned) against.
-# When present, the doc-maturity-auditor's vocabulary re-partition check attributes any partition hole
-# to the version delta (authored-against vX vs vendored vY), and the upgrade walk (install-dictum
-# re-vendor path / doc-levelup) updates it after recording the in/out decision for each newly published
-# sub-aspect key. Absent, those tools still run — findings just carry no version attribution.
-# authored_against: <standard version, e.g. 1.1.0>
+# RECOMMENDED, stamped by doc-scaffold at creation: the standard version this set was authored (or last
+# re-partitioned) against, as its SIGNED RELEASE TAG. It is the durable provenance anchor and the START
+# LINE for any upgrade — it survives re-vendoring (the local copy is overwritten on upgrade; this field is
+# not), so a later, possibly large-gap, walk knows where it began. The upgrade walk (install-dictum /
+# doc-levelup) advances it after the in/out decision for each newly published sub-aspect key; the
+# doc-maturity-auditor attributes a partition hole to the version delta (authored-against vX vs vendored vY).
+# Absent, the tools still run — findings carry no version attribution and a large-gap walk must guess its start.
+authored_against: <signed release tag, e.g. v1.0.0>
+
+# OPTIONAL: where the standard can be fetched when NO local copy is kept — a best-effort breadcrumb, not a
+# resolver. Tools read a local vendored dictum/ copy first; with none, they may fetch this source at the
+# recorded tag (plain git — the standard ships no resolver). Best-effort by intent: the canonical location
+# may move (name/repo deliberately unpinned — TRADEMARK.md), so a local copy is the only guaranteed-durable
+# path and no integrity gate depends on this. With NEITHER a local copy NOR a standard_source there is no
+# fallback — keep one of them.
+# standard_source: <e.g. https://github.com/pnjacket/dictum>
 
 # Optional. Present only when the set was REVERSE-AUTHORED from existing code (Part 10f, doc-excavate)
 # rather than authored doc-first — so consumers know it is an as-built baseline whose intent-level

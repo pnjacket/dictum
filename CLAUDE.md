@@ -30,6 +30,7 @@ Dictum is a product-agnostic **standard for build-ready software documentation**
 
 ## Conventions when editing
 
+- **Editorial form is governed by [`EDITORIAL.md`](EDITORIAL.md)** (the source; the points below summarize it): the **three-tier split** — rule + one-line why → the standard · distilled rationale → `failure-mode-catalog.md` · evidence/worked-examples/numbers → `dictum-lab`; no war-stories or research artifacts ("(round N)", "vX.Y bar") in normative prose; the standard stands alone and never links to the lab; describe-by-shape. Charter version rides the standard's (RELEASES.md).
 - Docs are **self-exemplifying**: match the existing front-matter and document-contract structure.
 - If you add or change a **rule**, keep `failure-mode-catalog.md` and the relevant *Design Decisions* in sync.
 - `concerns/11.x` correspond to STANDARD Part 11 — keep the two consistent.
