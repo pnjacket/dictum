@@ -1,2 +1,7 @@
 __pycache__/
 *.pyc
+
+# Editorial linter denylist — holds the forbidden real project/domain names the
+# describe-by-shape rule scans for. NEVER commit it; the names must not enter
+# the repo or its history. (See EDITORIAL.md Part 3; the linter lives in dictum-lab.)
+.editorial-denylist

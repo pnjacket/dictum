@@ -87,12 +87,17 @@ By making a contribution to this project, I certify that:
    invest in it. Dictum's rules are tied to real failures — see
    [`failure-mode-catalog.md`](failure-mode-catalog.md) — so a change to a rule
    should say which failure it prevents.
-2. Keep docs **self-exemplifying**: match the existing front-matter and
+2. Follow the **[Editorial Charter](EDITORIAL.md)** — the rules for how the
+   standard's own text is authored: the three-tier split (rule → standard ·
+   rationale → catalog · evidence → the lab), rule-plus-one-line-why, no
+   war-stories in normative prose, and describe-by-shape. Its Appendix B is the
+   PR checklist your change is reviewed against.
+3. Keep docs **self-exemplifying**: match the existing front-matter and
    document-contract structure. If you change a rule, keep
    `failure-mode-catalog.md` and the relevant *Design Decisions* in sync, and
    keep `concerns/11.x` consistent with `STANDARD.md` Part 11.
-3. Reference contracts by ID; never duplicate a contract another concern owns.
-4. Commit with `git commit -s` and open a pull request.
+4. Reference contracts by ID; never duplicate a contract another concern owns.
+5. Commit with `git commit -s` and open a pull request.
 
 ## Questions
 

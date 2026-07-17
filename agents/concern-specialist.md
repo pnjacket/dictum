@@ -19,4 +19,5 @@ A reusable specialist parameterized by **one concern**. State the concern when i
 ## Guardrails
 - Right-size via scope, not by weakening Contract-grade.
 - Don't invent product facts; leave `[GAP]`/Open Questions where unknown.
+- Never press the operator toward a guess: *"can't / not-my-place to answer"* yields a `[GAP]` (not an `[ASSUMPTION]`), carried forward — not re-asked of the same stuck operator this session.
 - Keep edits confined to the named concern's doc(s).

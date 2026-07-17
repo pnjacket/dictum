@@ -1,0 +1,44 @@
+# Editorial linter — repo-hygiene CI for the standard's own prose.
+#
+# This is NOT a conformance gate. The definition of Dictum conformance never
+# depends on the lab (EDITORIAL.md Part 2; the boundary rule). This workflow only
+# lints the standard's *own* prose against the Editorial Charter, using a tool
+# hosted in the research companion. The forbidden-name check auto-skips here (its
+# denylist is local-only, never committed); the standard→lab-link, research-prose,
+# and migrated-section checks run and gate the PR on ERRORs only. If the lab tool
+# isn't reachable (e.g. not yet on lab's default branch, or the repo moved), the
+# check skips with a warning rather than failing — best-effort, never a hard
+# dependency, consistent with the boundary rule.
+name: editorial-lint
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  editorial-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the standard
+        uses: actions/checkout@v4
+        with:
+          path: dictum
+      - name: Check out the research companion (for the lint tool only)
+        uses: actions/checkout@v4
+        continue-on-error: true   # best-effort: a missing/unreachable lab must not hard-fail a hygiene check
+        with:
+          repository: pnjacket/dictum-lab
+          path: dictum-lab
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Run the editorial linter
+        run: |
+          lint="dictum-lab/tools/editorial-lint/dictum-editorial-lint.py"
+          if [ ! -f "$lint" ]; then
+            echo "::warning::editorial-lint skipped — lint tool not found at dictum-lab (not yet on its default branch, or repo unreachable). Best-effort repo-hygiene check, not a conformance gate."
+            exit 0
+          fi
+          python3 "$lint" dictum
