@@ -7,7 +7,7 @@ version: 1.1.0
 
 # Dictum — Open Items
 
-The core standard is complete and validation-hardened (Parts 0–13, the full enhancement lifecycle + the doc-led implementation flow + the reverse-authoring/brownfield bootstrap (Part 10f), the advisory tool suite of 5 skills + 5 agents, the doc↔tracker boundary (Part 10c), and a worked example at [`examples/`](examples/); `v1.1.0` — see [`RELEASES.md`](RELEASES.md) for the full release notes). **Nothing below is blocking** — these are deferred design items, recorded here so they live in the repo rather than only in a maintainer's notes.
+The core standard is complete and validation-hardened (Parts 0–13, the full enhancement lifecycle + the doc-led implementation flow + the reverse-authoring/brownfield bootstrap (Part 10f), the advisory tool suite of 6 skills + 5 agents, the doc↔tracker boundary (Part 10c), and a worked example at [`examples/`](examples/); `v1.1.0` — see [`RELEASES.md`](RELEASES.md) for the full release notes). **Nothing below is blocking** — these are deferred design items, recorded here so they live in the repo rather than only in a maintainer's notes.
 
 ## Parked design topics
 

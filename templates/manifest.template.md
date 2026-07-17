@@ -2,7 +2,7 @@
 artifact: documentation-standard
 role: template
 status: draft
-version: 0.5.0
+version: 0.6.0
 ---
 
 # Product-Profile Manifest — Template
@@ -55,6 +55,7 @@ traits:
   commercial: false               # → Business & Legal
   regulated: false                # → deepens Governance & Compliance
   security_risk: []               # auth | pii | secrets | network → deepens Security
+  code_authorship: model-authored # human | model-assisted | model-authored → scales Governance source-provenance (11.8): model-authored ⇒ provenance undeclared-by-default ⇒ a best-effort detection pass is owed. Safe default: the stronger bar is opt-OUT (set human/model-assisted deliberately), never opt-in
 
 # One entry per concern. in_scope=false ⇒ omit/Absent. Always-present = Core + Baseline.
 # out_of_scope_subaspects keys = the published `key` column of that concern spec's "Sub-aspects"
