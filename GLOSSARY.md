@@ -2,7 +2,7 @@
 artifact: documentation-standard
 role: standard
 status: published
-version: 1.1.0
+version: 1.2.0
 ---
 
 # Glossary
@@ -29,11 +29,13 @@ Terms used across the Documentation Standard and the concern specs.
 
 - **Document contract** — the uniform section skeleton every doc follows; *which sections are complete IS the maturity*.
 - **Contract (inter-concern)** — an artifact one concern owns and others reference (e.g. the API surface). **Owned once, referenced everywhere.**
-- **Stable ID** — a layout-independent identifier (`CAP-###`, `ENTITY-###`, …) used for cross-references; survives merge/split. **Token grammar (normative, Std Part 5):** two or more hyphen-joined segments of `A–Z 0–9`, the first beginning with a letter and ≥2 characters — `[A-Z][A-Z0-9]+(-[A-Z0-9]+)+`. The one shape both machine-extraction extension points presuppose; tooling may rely on it.
+- **Stable ID** — a layout-independent identifier (`CAP-###`, `ENTITY-###`, …) used for cross-references; survives merge/split. **Token grammar (normative, Std Part 5):** two or more hyphen-joined segments of `A–Z 0–9`, the first beginning with a letter and ≥2 characters — `[A-Z][A-Z0-9]+(-[A-Z0-9]+)+`. The one shape both **ID-bearing** extension points presuppose; tooling may rely on it. (The `SOURCE:` provenance marker is a third extension point with its own non-ID token.)
 - **ID registry** — the web of stable IDs across concerns, forming end-to-end traceability. Numeric `###` is the default suffix; semantic suffixes are an allowed variant.
 - **Register line** — the one line that **mints** an owned ID: a heading, a table row (ID in the first cell), a list item, or a paragraph lead, with the ID (conventionally backticked) in the lead segment before the first em-dash/colon and the definition following. Every other occurrence of the ID is a non-minting **reference**. Only the form is fixed — the method's second machine-extraction extension point, after the in-code `DICT: <ID>` token (Std Part 5).
 - **Committed-config key (`CONFIG-###`)** — a committed, behavior-shaping configuration key as an owned contract: name, type/units, default, and the invariant/behavior it drives by ID reference (a retention cutoff feeding a cleanup invariant, a cadence). Owned by Operations (11.10); distinct from `ENV-###`, which records environment/infrastructure facts — an environment may *set* a key's value, but the key's contract is owned once.
 - **Output-document schema (`OUT-###`)** — the contracted shape of an emitted document (a JSON report, a CSV export, rendered Markdown) where the document itself is the load-bearing output: structure, field/column names + types + units, ordering, stability guarantees. Owned by Interfaces (11.4); the emitting element (`CLI/API/LIB-###`) references it as its typed output.
+- **First-party source provenance (`source-provenance`)** — the attested `{origin, license, outbound-compatibility}` of every non-trivial *first-party* code unit vendored / ported / adapted / transliterated from an external source; copied-under-incompatible-license is a **defect**, not a smell. Owned by Governance (11.8), always-on; **distinct from `license-ip-compliance`** (the *dependency* boundary — a green dependency scan is **not** source clearance). Where code is model-authored, provenance is undeclared-by-default so a best-effort detection pass is owed, its residual recorded — never read as "cleared" (Std 11.8, Part 5).
+- **`SOURCE:` provenance marker** — the code-site attestation token **`SOURCE: <origin> <license>`** in a host-language comment (leader is the language's own, like `DICT:`); a third **machine-extraction extension point**, carrying its own **non-ID** token. The 11.8 source-provenance register consumes it and a gate checks the declared license against the outbound stance. Closes the *declared* copying case; the *undeclared* case (an LLM reproducing licensed source with no attribution) needs detection (Std Part 5).
 - **Forward reference** — a "described-here, minted-by-X" placeholder for a contract its owning concern hasn't minted yet; tightened to the real ID when the producer reaches Contract-grade. The sanctioned authoring-order seam — the consumer never mints the owner's ID (Std Part 5).
 - **Contracts-as-bounds** — a contract that *bounds* a deliberately delegated value without fixing it (a min contrast ratio over delegated tokens; a frame budget over chosen algorithms). The bound is the owned, testable contract; the value inside stays the delegate's freedom (Std Part 5).
 - **Workload script (`SEQ-###`)** — a contracted input sequence that *is* a real-time/client `PERF-###` target's load condition, standing where "requests/second" would (Performance 11.13).
@@ -47,6 +49,7 @@ Terms used across the Documentation Standard and the concern specs.
 - **`authored_against` (manifest)** — the signed release **tag** a doc set was authored (or last re-partitioned) against: its provenance anchor and the **start line** for an upgrade walk. Stamped by `doc-scaffold` at creation, advanced by the upgrade walk; survives re-vendoring. Recommended, not required — absent, a large-gap upgrade must guess its start (Std `RELEASES.md`).
 - **`standard_source` (manifest)** — optional best-effort location to fetch the standard when no local copy is kept — a breadcrumb, not a resolver. The canonical location may move, so a local copy is the only guaranteed-durable path (Std `RELEASES.md`).
 - **Trait / Trigger** — a product characteristic (has-UI, persists-data, multi-tenant, …) that switches modules on.
+- **`code_authorship` (trait)** — `human` | `model-assisted` | `model-authored`. Scales Governance's `source-provenance` depth: model-authored ⇒ provenance is undeclared-by-default ⇒ a best-effort detection pass is owed (Std 11.8).
 
 ## Enhancement lifecycle
 

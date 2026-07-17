@@ -114,6 +114,41 @@ the one-authoritative-version guarantee:
 
 ## Release notes
 
+### v1.2.0 — MINOR
+
+An additive method release — the first under the version-pinned-dependency /
+append-only re-conformance model. Each addition names its re-conformance step.
+
+- **First-party source provenance** (STANDARD Part 5; Governance 11.8;
+  failure-mode #36) — a new always-on **`source-provenance`** sub-aspect on
+  Governance: every non-trivial vendored / adapted / ported first-party code
+  unit is attested `{origin, license, outbound-compatibility}`;
+  copied-under-incompatible-license is a **defect**; a green dependency license
+  scan is **not** source clearance (`license-ip-compliance` is now explicitly the
+  *dependency* boundary). *Re-conformance:* record an in/out scope decision for
+  `source-provenance` on 11.8 — in for any product that ships first-party code —
+  and audit non-trivial first-party units for an attested provenance
+  determination; **move any first-party attestations previously parked under
+  `license-ip-compliance` to the new key** (that key is now the dependency
+  boundary only).
+- **`code_authorship` trait** (`templates/manifest.template.md`; 11.8) — `human`
+  / `model-assisted` / `model-authored`, scaling `source-provenance` depth. When
+  model-authored, provenance is undeclared-by-default, so a **best-effort
+  detection pass** is owed and its **residual recorded** (attestation alone
+  reproduces the declaration-blindness it closes). *Re-conformance:* set the
+  trait; where model-authored, run the detection pass and record its residual.
+- **`ip-copyright-provenance` sub-aspect** (Business & Legal 11.15) — an additive
+  sibling of `ip-trademark-constraints` for a **declared** copyright/source-
+  derivation constraint; `LEGAL-###` generalized to copyright/source, not only
+  trademark. *Re-conformance:* none unless such a constraint exists — then record
+  it as a `LEGAL-###` under the new key.
+- **`SOURCE:` in-code provenance marker** (STANDARD Part 5) — a third
+  machine-extraction extension point: `SOURCE: <origin> <license>` at a copied /
+  adapted code site, consumed by the 11.8 register. Its own **non-ID** token; the
+  standard blesses no detector (one lives non-normatively in the research
+  companion). *Re-conformance:* none — optional convention, recommended at build
+  time whenever a unit is copied or adapted.
+
 ### v1.1.0 — MINOR
 
 An additive method release. Per the policy above, each addition names the

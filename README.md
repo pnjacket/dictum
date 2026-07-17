@@ -44,7 +44,7 @@ A doc set is written ~once and **enhanced** for the rest of the product's life �
 | [`failure-mode-catalog.md`](./failure-mode-catalog.md) | Each rule tied to the real failure it prevents. |
 | [`concerns/`](./concerns) | The 15 concern specifications (6 core, 2 baseline, 7 module). |
 | [`templates/`](./templates) | Fill-in skeletons: per-concern, single-file, the product-profile manifest, the binding map, and the build-status record. |
-| [`skills/`](./skills) · [`agents/`](./agents) | Advisory Claude Code tooling — 5 skills + 5 agents (see below). |
+| [`skills/`](./skills) · [`agents/`](./agents) | Advisory Claude Code tooling — 6 skills + 5 agents (see below). |
 | [`examples/`](./examples) | A complete worked example: the CLI validation product (trimmed and renamed), a published single-file doc set with resolvable bindings over a ~200-line product. |
 | [`ROADMAP.md`](./ROADMAP.md) | Open and deferred items (nothing blocking). |
 
@@ -84,7 +84,7 @@ Real-world trials, reference tooling (including a deterministic, CI-friendly gat
 > [`RELEASES.md`](./RELEASES.md) for how to verify one. Cite and build against a
 > release, not against `main`.
 
-**`v1.1.0`**. The standard is complete and validation-hardened across Parts 0–13: the full authoring method, the enhancement lifecycle *(10d)*, the doc-led implementation flow *(10e)*, brownfield reverse-authoring *(10f)*, the doc↔tracker boundary *(10c)*, and the advisory tool suite (5 skills + 5 agents). v1.1.0 binds the **publish step** to the authoring gates (build-ready hands off a *published* set; implementation events never touch doc status — failure-mode #30), adds the **versioning policy**, names the two **machine-extraction extension points** (the in-code `DICT: <ID>` marker token; the register-form minting bar), adds the `CONFIG-###`/`OUT-###` contract kinds, the optional dual-realization binding, the vocabulary re-partition check + upgrade walk, and the worked example — full notes in [`RELEASES.md`](./RELEASES.md).
+**`v1.1.0`**. The standard is complete and validation-hardened across Parts 0–13: the full authoring method, the enhancement lifecycle *(10d)*, the doc-led implementation flow *(10e)*, brownfield reverse-authoring *(10f)*, the doc↔tracker boundary *(10c)*, and the advisory tool suite (6 skills + 5 agents). v1.1.0 binds the **publish step** to the authoring gates (build-ready hands off a *published* set; implementation events never touch doc status — failure-mode #30), adds the **versioning policy**, names the three **machine-extraction extension points** (the in-code `DICT: <ID>` marker token; the register-form minting bar; the `SOURCE:` provenance marker), adds the `CONFIG-###`/`OUT-###` contract kinds, the optional dual-realization binding, the vocabulary re-partition check + upgrade walk, and the worked example — full notes in [`RELEASES.md`](./RELEASES.md).
 
 It was distilled from a real AI-driven build study, then **validated by building** four deliberately different products — a CLI, a multi-user record-management web app, a real-time multi-tenant messaging SaaS exercising all 15 concerns, and a client-only browser voxel game. Each build fed refinements back into the bars — every one traceable to an observed failure in [`failure-mode-catalog.md`](./failure-mode-catalog.md); the per-build validation write-ups live in the research companion (above). The worked examples throughout the standard are illustrations, not dependencies. Open and deferred items live in [`ROADMAP.md`](./ROADMAP.md).
 

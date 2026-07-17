@@ -1,6 +1,6 @@
 ---
 name: install-dictum
-description: Use when installing the Dictum documentation standard and its advisory tooling into another product repo. Copies the five skills and five agents into the target's .claude/, vendors (or references) the standard material, and writes a CLAUDE.md path-resolution pointer so the tools locate the standard unambiguously. On a re-install that vendors a newer standard over an existing doc set, runs the upgrade walk (new sub-aspect keys get an explicit in/out decision). Triggers - "install dictum on <repo>", "set up dictum in this repo", "add the doc tooling to <repo>", "vendor the standard into <repo>", "upgrade dictum in <repo>".
+description: Use when installing the Dictum documentation standard and its advisory tooling into another product repo. Copies the six skills and five agents into the target's .claude/, vendors (or references) the standard material, and writes a CLAUDE.md path-resolution pointer so the tools locate the standard unambiguously. On a re-install that vendors a newer standard over an existing doc set, runs the upgrade walk (new sub-aspect keys get an explicit in/out decision). Triggers - "install dictum on <repo>", "set up dictum in this repo", "add the doc tooling to <repo>", "vendor the standard into <repo>", "upgrade dictum in <repo>".
 ---
 
 # install-dictum
@@ -8,7 +8,7 @@ description: Use when installing the Dictum documentation standard and its advis
 Installs the Dictum tooling and reference material into a **target product repo** so its skills/agents resolve the standard without guessing. Advisory: confirm the target and mode before writing; never overwrite existing files without asking. This skill does the *install* only — it does not scaffold docs (that's `doc-scaffold`, the suggested next step).
 
 ## Inputs you rely on
-- The **Dictum checkout** (this repo): `skills/` (5 skills), `agents/*.md` (5 agents), and the reference material `STANDARD.md`, `GLOSSARY.md`, `failure-mode-catalog.md`, `concerns/11.x-*.md`, `templates/`.
+- The **Dictum checkout** (this repo): `skills/` (6 skills), `agents/*.md` (5 agents), and the reference material `STANDARD.md`, `GLOSSARY.md`, `failure-mode-catalog.md`, `concerns/11.x-*.md`, `templates/`.
 - The **target repo** path (from the operator; e.g. a sibling repo).
 
 ## Procedure
@@ -20,7 +20,7 @@ Installs the Dictum tooling and reference material into a **target product repo*
    An **upgrade** is the exception to local-first: it resolves the *target* (newer) tag explicitly — re-vendored locally, or fetched at the target tag — never the pinned old copy (a stale local copy read during an upgrade would hide the new vocabulary and pass a set it should fail).
    Provenance is **best-effort by intent**: a `SHA256SUMS` check against the tag is available to anyone who wants to confirm a copy is canonical, but **no tool gates on it** — copies and forks are expected and uncontrolled (`RELEASES.md`).
 3. **Install the tooling** (both modes). Create `.claude/skills/` and `.claude/agents/` in the target and copy:
-   - Skills: `doc-scaffold`, `doc-excavate`, `doc-levelup`, `doc-feature`, `doc-change-impact` (copy each skill *directory*).
+   - Skills: `doc-scaffold`, `doc-excavate`, `doc-levelup`, `doc-feature`, `doc-change-impact`, `report-failure-mode` (copy each skill *directory*).
    - Agents: all of `agents/*.md` — `doc-maturity-auditor`, `code-cartographer`, `drift-detector`, `implementation-planner`, `concern-specialist`.
    - Do **not** copy this `install-dictum` skill into the target — it belongs to the Dictum checkout, not to a product repo (installing it there is the confusion this skill exists to prevent).
 4. **Place the reference material.**
@@ -45,7 +45,8 @@ DST=<target-repo>
 
 mkdir -p "$DST/.claude/skills" "$DST/.claude/agents"
 cp -r "$SRC/skills/doc-scaffold" "$SRC/skills/doc-excavate" "$SRC/skills/doc-levelup" \
-      "$SRC/skills/doc-feature"  "$SRC/skills/doc-change-impact" "$DST/.claude/skills/"
+      "$SRC/skills/doc-feature"  "$SRC/skills/doc-change-impact" \
+      "$SRC/skills/report-failure-mode" "$DST/.claude/skills/"
 cp "$SRC/agents/"*.md "$DST/.claude/agents/"
 
 mkdir -p "$DST/dictum"
